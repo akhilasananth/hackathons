@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <meta name="theme-color" content="#EF5350" />
+
+  <title>Starter Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="node_modules/lockr/lockr.min.js"></script>
+  <script type="text/javascript" src="js/storage.js"></script>
+  <script type="text/javascript">
+    function updateGoals() {
+      var goalRunItem = "<li class=\"collection-item avatar\"><i class=\"material-icons circle green\">directions_run</i><span class=\"title\">%title%</span><p>%curr% km run of %target% km</p><a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">more_vert</i></a></li>"
+      var goalDietItem = "<li class=\"collection-item avatar\"><i class=\"material-icons circle red\">restaurant</i><span class=\"title\">%title%</span><p>%curr% calories consumed of %target% calories</p><a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">more_vert</i></a></li>"
+      var goalList = Lockr.get('goals');
+      for (var i = 0; i < goalList.length; i++) {
+        if (goalList[i].isComplete) {
+          continue;
+        }
+        if (goalList[i].type === 1) {
+          $('#current_goals_list').append(goalRunItem.replace("%title%", goalList[i].name).replace("%curr%", goalList[i].currentVal).replace("%target%", goalList[i].goalVal));
+
+        }
+        else {
+          $('#current_goals_list').append(goalDietItem.replace("%title%", goalList[i].name).replace("%curr%", goalList[i].currentVal).replace("%target%", goalList[i].goalVal));
+
+        }
+      }
+    }
+
+    function updateCompletedGoals() {
+      var goalRunItem = "<li class=\"collection-item avatar\"><i class=\"material-icons circle green\">directions_run</i><span class=\"title\">%title%</span><p>%target% km successfully completed!</p><a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">more_vert</i></a></li>"
+      var goalDietItem = "<li class=\"collection-item avatar\"><i class=\"material-icons circle red\">restaurant</i><span class=\"title\">%title%</span><p>%target% calories successfully consumed!</p><a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">more_vert</i></a></li>"
+      var goalList = Lockr.get('goals');
+      for (var i = 0; i < goalList.length; i++) {
+        if (!goalList[i].isComplete) {
+          continue;
+        }
+        if (goalList[i].type === 1) {
+          $('#completed_goals_list').append(goalRunItem.replace("%title%", goalList[i].name).replace("%target%", goalList[i].goalVal));
+
+        }
+        else {
+          $('#completed_goals_list').append(goalDietItem.replace("%title%", goalList[i].name).replace("%target%", goalList[i].goalVal));
+
+        }
+      }
+    }
+
+    function addGoalItem() {
+      var target = parseInt($('#target').val());
+      var goalName = $('#goal_name').val();
+      var goalType = $('#goal_type option:selected').val();
+      goalType = parseInt(goalType);
+      console.log(goalType);
+      addGoal(goalName, target, goalType);
+      $("#current_goals_list").empty();
+      updateGoals();
+      Materialize.toast('New Goal Added!', 5000);
+    }
+
+
+    $(document).ready(function() {
+          updateGoals();
+          updateCompletedGoals();
+          });
+  </script>
+</head>
+
+<body>
+  <div class="navbar-fixed">
+    <nav class="red lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">Dash</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Scheduled Runs</a></li>
+          <li><a href="#">Run Log</a></li>
+          <li><a href="diary.html">Food Diary</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <div id="sidebar-header">
+            <div class="row">
+              <div class="col sm5">
+                <img class="profile-thumbnail circle" src="img/shoe-final.jpg" height=40 width=40>
+              </div>
+              <div class="acct-info col sm7">
+                <h6>Eva Person  
+                <p>
+                  <small>eva.person@domain.com</small> 
+                </p>
+              </h6>
+              </div>
+            </div>
+          </div>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="future.html">Scheduled Runs</a></li>
+          <li><a href="past.html">Run Log</a></li>
+          <li><a href="diary.html">Food Diary</a></li>
+          <li><a href="plan.html">Plan a Run</a></li>
+          <li><a href="goals.html">Goals & Progress</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </div>
+  <div class="container">
+    <br>
+    <div class="card center-align">
+      <div class="card-title">Today's Stats</div>
+      <div class="card-content row" id="stats_card">
+        <div class="col s6">
+          <h6>Distance</h6>
+          <h5>20 km</h5>
+        </div>
+        <div class="col s6">
+          <h6>Calories</h6>
+          <h5>300</h5>
+        </div>
+      </div>
+      <div class="card-action">
+        <a href="graphs.html">Detailed Stats</a>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <ul class="tabs">
+    <li class="tab col s6"><a class="active" href="#current_goals">Current Goals</a></li>
+    <li class="tab col s6"><a href="#completed_goals">Completed Goals</a></li>
+  </ul>
+  </div>
+  </div>
+  <div class="container" id="current_goals">
+    <ul id="current_goals_list" class="collection">
+    </ul>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+      <a class="modal-trigger waves-effect waves-light btn-floating btn-large red" href="#modal1">
+        <i class="large material-icons">add</i>
+      </a>
+    </div>
+  </div>
+
+  <div class="container" id="completed_goals">
+    <ul id="completed_goals_list" class="collection">
+    </ul>
+  </div>
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-header cyan">
+      <h5 class="white-text">Add Goal</h5>
+    </div>
+    <div class="modal-content">
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="" id="goal_name" type="text">
+              <label for="goal_name">Goal Name</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+              <label>Goal Type</label>
+              <select class="browser-default" id="goal_type">
+                <option value="1" selected>Fitness</option>
+                <option value="2">Dietary</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Distance/Calories" id="target" type="text">
+              <label id="target_label" for="target">Target</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="addGoalItem()">OK</button>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">CANCEL</a>
+    </div>
+  </div>
+
+
+  </div>
+  </div>
+
+
+
+  <!--  Scripts-->
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+</body>
+
+</html>

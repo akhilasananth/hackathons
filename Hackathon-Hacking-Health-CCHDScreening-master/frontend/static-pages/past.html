@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <meta name="theme-color" content="#EF5350" />
+
+  <title>Dash</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="node_modules/lockr/lockr.min.js"></script>
+  <script type="text/javascript" src="js/storage.js"></script>
+</head>
+
+<body>
+  <div class="navbar-fixed">
+    <nav class="red lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">Dash</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="future.html">Scheduled Runs</a></li>
+          <li><a href="past.html">Run Log</a></li>
+          <li><a href="diary.html">Food Diary</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <div id="sidebar-header">
+            <div class="row">
+              <div class="col sm5">
+                <img class="profile-thumbnail circle" src="img/shoe-final.jpg" height=40 width=40>
+              </div>
+              <div class="acct-info col sm7">
+                <h6>Eva Person  
+                <p>
+                  <small>eva.person@domain.com</small> 
+                </p>
+              </h6>
+              </div>
+            </div>
+          </div>
+           <li><a href="index.html">Home</a></li>
+           <li><a href="future.html">Scheduled Runs</a></li>
+           <li><a href="past.html">Run Log</a></li>
+           <li><a href="diary.html">Food Diary</a></li>
+           <li><a href="plan.html">Plan a Run</a></li>
+           <li><a href="goals.html">Goals & Progress</a></li>
+           <li><a href="#">Settings</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="">
+    <div class="row" style="margin-bottom: 0px;">
+      <div class="col s12 ">
+        <div class="card-panel cal-panel cyan">
+          <span class="white-text">
+              <div id="cal-title">Total Distance Run Today</div>
+              <h3 id="total_calories">2.114e-12 LY</h3>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div id="runholder">
+    </div>
+
+
+
+    <div class="row">
+      <div class="col s12">
+        <a href="plan.html" style="width: 100%;" class="waves-effect waves-light cyan btn">Plan A Run</a>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+  </div>
+
+  <!--  Scripts-->
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script type="text/javascript">
+    function formattitle(runobj)
+    {
+      if (runobj.dest != "" && runobj.dest != undefined)
+      {
+        return "Ran to " + runobj.dest + "like a baws";
+      }
+      if (runobj.laps != "" && runobj.laps != undefined)
+      {
+        return "Ran " + runobj.laps + " laps! Woo!"
+      }
+      if (runobj.distance != "" && runobj.distance != undefined)
+      {
+        return "Ran " + runobj.distance + " km! OMG!";
+      }
+      return "Generic run title";
+    }
+  
+    function makerun(runobj, id) {
+      var run = "<div class=\"row\">\
+        <div class=\"col s12\">\
+          <div class=\"card\">\
+            <div class=\"card-image\">\
+              <img src=\"img/FakeMap.png\">\
+              <span class=\"black-text card-title\">%title%</span>\
+            </div>\
+            <div class=\"card-content\">\
+              <span>%date% at %time%</span>\
+            <span style=\"float:right;\">%distance% km</span>\
+            </div>\
+            <div class=\"card-action\">\
+              <a href=\"status.html?id=%id%&future=%future%\">View Run</a>\
+            </div>\
+          </div>\
+        </div>\
+      </div>";
+      
+      console.log("I made a run!");
+      $("#runholder").append(run.replace("%distance%", runobj.distance != "" && runobj.distance != undefined ? runobj.distance : Math.floor(Math.random() * 60))
+                                .replace("%date%", runobj.date)
+                                .replace("%time%", runobj.time)
+                                .replace("%title%", formattitle(runobj))
+                                .replace("%id%", id)
+                                .replace("%future%", "0"));
+    }
+    $(function() {
+      var runlist = Lockr.get("runs");
+      console.log(runlist);
+      console.log(runlist.length);
+      for (x = runlist.length; x >= 0; x--)
+      {
+        if (runlist[x] != undefined) makerun(runlist[x], x);
+      }
+
+    })
+  </script>
+</body>
+
+</html>

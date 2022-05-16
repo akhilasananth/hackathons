@@ -1,0 +1,102 @@
+<div>
+<form ng-if="displayFirstScreen">
+ <fieldset class="scheduler-border">
+  <legend class="scheduler-border">Initial Test</legend>
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Time of screen</p>
+            <div class="input-group"
+                moment-picker="ctrl.timepicker"
+                format="HH:mm:ss">
+                <span class="input-group-addon">
+                    <i class="octicon octicon-clock"></i>
+                </span>
+                <input class="form-control"
+                    placeholder="Select a time"
+                    ng-model="ctrl.timepicker"
+                    ng-model-options="{ updateOn: 'blur' }">
+            </div>
+        </div>
+        <div class="col-sm-4 control-group">
+            <form >
+            <div class="form-group">
+                <label class="control-label input-label" for="R_hand" >R Hand:</label>
+                <input type="text" class="form-control" id="R_hand_id" ng-model='r_hand'>
+                <label>Foot:</label>
+                <input type="text" class="form-control" id="foot_id" ng-model='foot'>
+            </div>
+            </form>
+             <button type="button" class="btn btn-primary btn-block" ng-click="screenTest(r_hand,foot)" >Compute</button>
+
+        </div>
+        <div class="col-sm-4">
+            <form>
+                <div class="isa_success" ng-if='displayPassedMessage'>
+                    <i class="fa fa-check"></i>
+                        Passed!
+                    </div>
+                
+                <div class="isa_error" ng-if='displayFailedMessage'>
+                    <i class="fa fa-times-circle"></i>
+                        Failed!
+                </div>
+                <div class="isa_warning" ng-if='displayIndeterminate'>
+                    <i class="fa fa-warning"></i>
+                    Indeterminate
+                </div>
+            </form>
+        </div>
+    </div>
+ </fieldset>
+</form>
+<!--hidden-->
+<form ng-if="displayRepeatedTestDisplay">
+<fieldset class="scheduler-border">
+  <legend class="scheduler-border">Repeated Test</legend>
+    <div class="row">
+        <div class="col-sm-4">
+            <p>Time of screen</p>
+            <div class="input-group"
+                moment-picker="ctrl.timepicker"
+                format="HH:mm:ss">
+                <span class="input-group-addon">
+                    <i class="octicon octicon-clock"></i>
+                </span>
+                <input class="form-control"
+                    placeholder="Select a time"
+                    ng-model="ctrl.timepicker"
+                    ng-model-options="{ updateOn: 'blur' }">
+            </div>
+        </div>
+        <div class="col-sm-4 control-group">
+              <form>
+            <div class="form-group">
+            <label class="control-label input-label" for="R_hand" >R Hand:</label>
+            <input type="text" class="form-control" id="R_hand_id" ng-model='r_hand'>
+            <label>Foot:</label>
+            <input type="text" class="form-control" id="foot_id" ng-model='foot'>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" ng-click="screenTest(r_hand,foot)" >Compute</button>
+            </form>
+        </div>
+        <div class="col-sm-4">
+            <form>
+                <div class="isa_success" ng-if='displayPassedMessage'>
+                    <i class="fa fa-check"></i>
+                        Passed!
+                    </div>
+                
+                <div class="isa_error" ng-if='displayFailedMessage'>
+                    <i class="fa fa-times-circle"></i>
+                        Failed!
+                </div>
+                <div class="isa_warning" ng-if='displayIndeterminate'>
+                    <i class="fa fa-warning"></i>
+                    Indeterminate
+                </div>
+            </form>
+        </div>
+    </div>
+ </fieldset>
+</form>
+</div>

@@ -1,0 +1,86 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+#cal-title {
+    font-size: 20px;
+    font-weight:bold;
+}
+
+#sidebar-header {
+  padding-top:20px;
+  padding-left: 15px;
+  background:#D32F2F;
+}
+
+.active {
+    color: #9ccc65;;
+}
+
+.acct-info {
+    padding:0px;
+}
+
+.acct-info h6 p {
+    margin: 2px;
+}
+
+.cal-panel {
+    text-align: center;
+}
+a{
+    color: black;
+}
+
+.modal-header {
+    padding: 5px 10px;
+}
+.collection .collection-item.avatar {
+    min-height: 63px;
+}
+
+#map-panel {
+    padding: 7px 0px 0px 0px;
+}
+
+.form-footer {
+    border-top: 1px solid #eee;
+    position: fixed;
+    left:0px;
+    bottom: 0px;
+    background: white;
+    padding:5px;
+    width:100%;
+    -webkit-box-shadow: 0px -1px 5px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -1px 5px -3px rgba(0,0,0,0.75);
+    box-shadow: 0px -1px 5px -3px rgba(0,0,0,0.75);
+}
+
+.form-footer a {
+    float: right;
+}
+
+#destination, #end-run {
+    display:none;
+}
+
+#stats_card{
+    margin-bottom: auto;
+}
+.graphpic{
+    max-width: 100%;
+}
+#homelink{
+    color:black;
+}

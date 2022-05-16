@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='ccdhApp'>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--external libraries-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!--script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.js"></script-->
+    <!--script src="./js/angular-moment-picker.js"></script-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/index.style.css" type="text/css">
+
+    <!--link rel="stylesheet" href="./js/angular-moment-picker.css" type="text/css"-->
+    
+
+    <!--Scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
+    <!-- script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script-->
+    <!--index controller-->
+    <script src="./js/index.controller.js"></script>
+    <!--home controller-->
+    <script src="./views/homePage/home.controller.js"></script>
+    <title>CCHH</title>
+    <link rel="stylesheet" href="views/homePage/css/the-big-picture.css">
+</head>
+
+<body  ng-controller='indexCtrl'>
+    <div class="container-fluid">
+        <nav class="navbar navbar-inverse">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand" id="kitcha-brand-id">CCHD.com</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a ui-sref='/home'>Home</a></li>
+                    <li><a href="#">History</a></li>
+                    
+                    <li><a ui-sref='/about'>Device</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="button" class="btn btn-default navbar-btn">
+                    <span></span>Submit</button>
+                </form>
+            </div>
+            <!-- the footer -->
+        </nav>
+        <div id="main"> <!--content for the page-->
+            <div ui-view>
+           
+            </div>
+        </div>
+    </div>
+    <!-- container div -->
+</body>
+
+</html>

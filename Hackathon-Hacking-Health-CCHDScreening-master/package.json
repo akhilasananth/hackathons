@@ -1,0 +1,25 @@
+{
+  "name": "cchd",
+  "version": "1.0.0",
+  "description": "Wireframe: https://drive.google.com/file/d/0B62g2Re5_e2BUDAxdFY0bkVxcVE/view?usp=sharing",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap-material-design": "^0.5.10",
+    "browser-sync": "^2.18.8",
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhinavthukral28/cchd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhinavthukral28/cchd/issues"
+  },
+  "homepage": "https://github.com/abhinavthukral28/cchd#readme"
+}

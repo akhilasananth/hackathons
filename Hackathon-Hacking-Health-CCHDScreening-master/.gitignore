@@ -1,0 +1,5 @@
+/node_modules
+
+\.idea/
+
+frontend/src/views/homePage/\.DS_Store

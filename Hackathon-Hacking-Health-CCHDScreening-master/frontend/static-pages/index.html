@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <meta name="theme-color" content="#EF5350" />
+  <title>Dash</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <script type="text/javascript" src="node_modules/lockr/lockr.min.js"></script>
+  <script type="text/javascript" src="js/storage.js"></script>
+
+</head>
+
+<body>
+  <div class="navbar-fixed">
+    <nav class="red lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">Dash</a>
+        <ul id="navId" class="right hide-on-med-and-down">
+          <li><a href="#">Home</a></li>
+          <li><a href="history.html">History</a></li>
+          <li><a href="devices.html">Devices</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <div id="sidebar-header">
+            <div class="row">
+              <div class="col sm5">
+                <img class="profile-thumbnail circle" src="img/shoe-final.jpg" height=40 width=40>
+              </div>
+              <div class="acct-info col sm7">
+                <h6>Eva Person
+                <p>
+                  <small>eva.person@domain.com</small> 
+                </p>
+              </h6>
+              </div>
+            </div>
+          </div>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="future.html">Scheduled Runs</a></li>
+          <li><a href="past.html">Run Log</a></li>
+          <li><a href="diary.html">Food Diary</a></li>
+          <li><a href="plan.html">Plan a Run</a></li>
+          <li><a href="goals.html">Goals & Progress</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
+      <br>
+      <div class="col s12">
+      </div>
+      <div class="col s12">
+        <a href="graphs.html"><div class="card center-align">
+
+          <div class="row">
+            <i class="material-icons">transfer_within_a_station</i>
+            <h5>Today's Stats</h5>
+
+            <div class="col s6">
+              <h6>Distance</h6>
+              <h5>20 km</h5>
+            </div>
+            <div class="col s6">
+              <h6>Calories</h6>
+              <h5>300</h5>
+            </div>
+          </div>
+          <div class="card-action" id="homecard">
+        <a id="homelink" href="graphs.html">Detailed Stats</a>
+      </div>
+        </div>
+      </div></a>
+      <div class="col s6">
+        <div class="card-panel center-align">
+          <a href="plan.html">
+            <i class="material-icons">directions_run</i>
+            <h5>Plan a Run</h5>
+          </a>
+        </div>
+      </div>
+      <div class="col s6">
+        <a href="diary.html">
+          <div class="card-panel center-align">
+            <i class="material-icons">restaurant</i>
+            <h5>Food Diary</h5>
+          </div>
+        </a>
+      </div>
+      <div class="col s6">
+        <a href="goals.html">
+          <div class="card-panel center-align">
+            <i class="material-icons">trending_up</i>
+            <h5>Goals</h5>
+          </div>
+        </a>
+      </div>
+      <div class="col s6">
+        <a href="past.html">
+          <div class="card-panel center-align">
+            <i class="material-icons">chrome_reader_mode</i>
+            <h5>Past Runs</h5>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script id="__bs_script__">
+    //<![CDATA[
+    document.write("<script async src='https://HOST:8081/browser-sync/browser-sync-client.2.11.2.js'><\/script>".replace("HOST", location.hostname));
+    //]]>
+  </script>
+</body>
+
+</html>

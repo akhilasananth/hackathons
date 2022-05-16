@@ -1,0 +1,17 @@
+{
+  "name": "uk_client",
+  "version": "1.0.0",
+  "description": "my app",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp serve"
+  },
+  "author": "",
+  "license": "ISC",
+    "devDependencies": {
+    "browser-sync": "^2.18.5",
+    "gulp": "^3.9.1",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-sourcemaps": "^2.4.0"
+  }
+}

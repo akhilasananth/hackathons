@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#EF5350" />
+
+  <title>Dash</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script type="text/javascript" src="node_modules/lockr/lockr.min.js"></script>
+  <script type="text/javascript" src="js/storage.js"></script>
+</head>
+<body>
+  <div class="navbar-fixed">
+  <nav class="red lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Dash</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="future.html">Scheduled Runs</a></li>
+        <li><a href="past.html">Run Log</a></li>
+        <li><a href="diary.html">Food Diary</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <div id="sidebar-header">
+          <div class="row"> 
+            <div class="col sm5">
+              <img class="profile-thumbnail circle" src="img/shoe-final.jpg" height=40 width=40>
+            </div>
+            <div class="acct-info col sm7">
+              <h6>Eva Person  
+                <p>
+                  <small>eva.person@domain.com</small> 
+                </p>
+              </h6>
+            </div> 
+          </div>
+        </div>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="future.html">Scheduled Runs</a></li>
+        <li><a href="past.html">Run Log</a></li>
+        <li><a href="diary.html">Food Diary</a></li>
+        <li><a href="plan.html">Plan a Run</a></li>
+        <li><a href="goals.html">Goals & Progress</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  </div>
+  
+  <div class="container">
+    <div class="section">
+      <form class="col s12" id="plan-form">
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="img/FakeMap.png">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Route Preview<i class="material-icons right">more_vert</i></span>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Route Preview<i class="material-icons right">close</i></span>
+              <p>This is a current preview of the route you're currently planning.</p>
+            </div>
+          </div>
+          <input type="checkbox" id="run-to-dest" />
+          <label for="run-to-dest">Run to a specific destination*</label>
+          <div>
+            <small>* By default planned route returns to starting location</small>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="start-loc" type="text" >
+              <label for="start-loc">Starting Location</label>
+            </div>
+          </div>
+           <div class="row" id="distlaps">
+            <div class="input-field col s6">
+              <input id="dist" type="text" >
+              <label for="dist">Distance (km)</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="laps" type="text" >
+              <label for="laps">Laps (optional)</label>
+            </div>
+          </div>
+          <div class="row" id="destination">
+             <div class="input-field col s12">
+              <input id="dest" type="text" >
+              <label for="dest">Destination</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+                <input id="rundate" type="date" class="datepicker">
+                <label for="rundate">Date</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="time" type="text" >
+              <label for="time">Time</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="invite" type="text">
+              <label for="invite">Invite Friends</label>
+            </div>
+          </div>
+          <div class="form-footer">
+            <a id="planbtn" href="#" class="waves-effect waves-green btn-flat">PLAN</a>
+            <a href="index.html" class="waves-effect waves-red btn-flat">CANCEL</a>
+          </div>
+          
+        </form> 
+    </div>
+  </div>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+<script type="text/javascript">
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+
+  $('#run-to-dest').click(function(e) {
+    if (e.target.checked) {
+      $('#distlaps').css("display", "none");
+      $('#destination').css("display", "block");
+    }
+    else {
+      $('#distlaps').css("display", "block");
+      $('#destination').css("display", "none");
+    }
+  });
+
+  function get_plan() {
+    return new Run($("#start-loc").val(), $("#dist").val(), $("#laps").val(),
+      $("#dest").val(), $("#rundate").val(), $("#time").val());
+  }
+
+  $(function() {
+        $("#planbtn").click(function(e) {
+              var plan = get_plan();
+              if (plan.date == "") {
+                console.log("Dun broke.");
+                if (plan.location == "") {
+                  Materialize.toast('Your route is missing a starting location.', 5000);
+                }
+                else if (plan.distance == "" &&
+                  plan.laps == "" &&
+                  plan.dest == "") {
+                  Materialize.toast("Your route is missing a destination, distance or laps.", 5000);
+                }
+                else if (plan.date == "" || plan.time == "") {
+                  Materialize.toast("Your route has an incomplete date/time", 5000);
+                }
+              }
+              else {
+                var rund = new Date(plan.date);
+                if (Date.now() > rund)
+                {
+                  addRun(plan);
+                } else {
+                  addFutureRun(plan);
+                }
+                Materialize.toast('Your route has been planned.', 5000);
+                document.getElementById("plan-form").reset();
+                $('#planbtn').attr('disabled', true);
+                setTimeout(function(){
+                  window.location.href = 'index.html';   
+                }, 1000) 
+               
+              }
+        
+      });
+    });
+  </script>
+  </body>
+</html>

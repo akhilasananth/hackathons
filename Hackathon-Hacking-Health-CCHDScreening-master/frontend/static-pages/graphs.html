@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <meta name="theme-color" content="#EF5350" />
+
+  <title>Starter Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="node_modules/lockr/lockr.min.js"></script>
+  <script type="text/javascript" src="js/storage.js"></script>
+  <script type="text/javascript">
+    function updateGoals() {
+      var goalRunItem = "<li class=\"collection-item avatar\"><i class=\"material-icons circle green\">directions_run</i><span class=\"title\">%title%</span><p>%curr% km run of %target% km</p><a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">more_vert</i></a></li>"
+      var goalDietItem = "<li class=\"collection-item avatar\"><i class=\"material-icons circle red\">restaurant</i><span class=\"title\">%title%</span><p>%curr% calories consumed of %target% calories</p><a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">more_vert</i></a></li>"
+      var goalList = Lockr.get('goals');
+      for (var i = 0; i < goalList.length; i++) {
+        if (goalList[i].isComplete) {
+          continue;
+        }
+        if (goalList[i].type === 1) {
+          $('#current_goals_list').append(goalRunItem.replace("%title%", goalList[i].name).replace("%curr%", goalList[i].currentVal).replace("%target%", goalList[i].goalVal));
+
+        }
+        else {
+          $('#current_goals_list').append(goalDietItem.replace("%title%", goalList[i].name).replace("%curr%", goalList[i].currentVal).replace("%target%", goalList[i].goalVal));
+
+        }
+      }
+    }
+
+    function updateCompletedGoals() {
+      var goalRunItem = "<li class=\"collection-item avatar\"><i class=\"material-icons circle green\">directions_run</i><span class=\"title\">%title%</span><p>%target% km successfully completed!</p><a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">more_vert</i></a></li>"
+      var goalDietItem = "<li class=\"collection-item avatar\"><i class=\"material-icons circle red\">restaurant</i><span class=\"title\">%title%</span><p>%target% calories successfully consumed!</p><a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">more_vert</i></a></li>"
+      var goalList = Lockr.get('goals');
+      for (var i = 0; i < goalList.length; i++) {
+        if (!goalList[i].isComplete) {
+          continue;
+        }
+        if (goalList[i].type === 1) {
+          $('#completed_goals_list').append(goalRunItem.replace("%title%", goalList[i].name).replace("%target%", goalList[i].goalVal));
+
+        }
+        else {
+          $('#completed_goals_list').append(goalDietItem.replace("%title%", goalList[i].name).replace("%target%", goalList[i].goalVal));
+
+        }
+      }
+    }
+
+    function addGoalItem() {
+      var target = parseInt($('#target').val());
+      var goalName = $('#goal_name').val();
+      var goalType = $('#goal_type option:selected').val();
+      goalType = parseInt(goalType);
+      console.log(goalType);
+      addGoal(goalName, target, goalType);
+      $("#current_goals_list").empty();
+      updateGoals();
+      Materialize.toast('New Goal Added!', 5000);
+    }
+
+
+    $(document).ready(function() {
+      $('select').material_select();
+      updateGoals();
+      updateCompletedGoals();
+    });
+  </script>
+</head>
+
+<body>
+  <div class="navbar-fixed">
+    <nav class="red lighten-1" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">Dash</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Scheduled Runs</a></li>
+          <li><a href="#">Run Log</a></li>
+          <li><a href="diary.html">Food Diary</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <div id="sidebar-header">
+            <div class="row">
+              <div class="col sm5">
+                <img class="profile-thumbnail circle" src="img/shoe-final.jpg" height=40 width=40>
+              </div>
+              <div class="acct-info col sm7">
+                <h6>Eva Person  
+                <p>
+                  <small>eva.person@domain.com</small> 
+                </p>
+              </h6>
+              </div>
+            </div>
+          </div>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="future.html">Scheduled Runs</a></li>
+          <li><a href="past.html">Run Log</a></li>
+          <li><a href="diary.html">Food Diary</a></li>
+          <li><a href="plan.html">Plan a Run</a></li>
+          <li><a href="goals.html">Goals & Progress</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </div>
+  <div class="container">
+    <br>
+    <div class="row">
+      <div class="col s12 m7">
+        <div class="card center-align">
+          <div class="card-title"><i class="material-icons">restaurant</i> Calorie Intake</div>
+          <div class="card-content">
+            <img class="graphpic" src="img/line-chart.gif">
+          </div>
+          <div class="row">
+            <div class="input-field col s10 offset-s1">
+              <select>
+                <option value="1">Week</option>
+                <option value="2">Month</option>
+                <option value="3">Year</option>
+              </select>
+              <label>Graph Time Frame</label>
+            </div>
+          </div>
+        </div>
+        <div class="card center-align">
+          <div class="card-title"><i class="material-icons">directions_run</i>Running Distance</div>
+          <div class="card-content">
+            <img class="graphpic" src="img/line-chart.gif">
+          </div>
+          <div class="row">
+            <div class="input-field col s10 offset-s1">
+              <select>
+                <option value="1">Week</option>
+                <option value="2">Month</option>
+                <option value="3">Year</option>
+              </select>
+              <label>Graph Time Frame</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!--  Scripts-->
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+</body>
+
+</html>

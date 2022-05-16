@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#EF5350" />
+
+  <title>Dash</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="node_modules/lockr/lockr.min.js"></script>
+  <script type="text/javascript" src="js/storage.js"></script>
+  <script type="text/javascript">
+    function updateFoods(){
+      var foodItem = "<tr><td>%name%</td><td>%calories%</td></tr>"
+      var foodList = Lockr.get('foods');
+      for (var i = 0; i < foodList.length; i++) {
+        $('#today').append(foodItem.replace("%name%", foodList[i].name).replace("%calories%", foodList[i].cal));
+      }
+    }
+    function addFoodItem(){
+      var calories = parseInt($('#calories').val());
+      var mealName = $('#meal_name').val();
+      addFood(mealName, calories, "Test");
+      $("#today").empty();
+      Materialize.toast('Food item has been added.', 5000);
+      updateFoods();
+    }
+    function updateTotalCalories(){
+      $('#total_calories').html(getTotalCalories());  
+    }
+    $(document).ready(function() {
+      updateFoods();
+      updateTotalCalories();
+    });
+  </script>
+</head>
+<body>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Last Name</label>
+        </div> 
+      </div>
+      
+    </form>
+  </div>
+
+
+  <!--  Scripts-->
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>

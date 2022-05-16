@@ -1,0 +1,42 @@
+
+<h1>Eligibility</h1>
+	 <form>
+	 <input type="radio" name="gender" value="Yes" > Yes<br>
+	 <input type="radio" name="gender" value="No"> No<br>
+	 </form>
+	 <strong>Reasons Screen Not Done</strong>
+	 <br>
+	 (Check Box that Applies)
+	 <form>
+	 	<input type="checkbox" name="declineOrDeffered" data-toggle="modal" data-target="#parentConsentModal"> Decline/deferred (Complete Decline / Defer Form))
+	 	<br>
+	 	<input type="checkbox" name="Over7Days"> Infant in NICU/SCN/PICU over 7 days
+	 	<br>
+	 	<input type="checkbox" name="diagnosedPrenatally">Infant diagnosed prenatally with heart defect
+	 	<br>
+	 	<input type="checkbox" name="diagnosedByPhysicalExam">Infant diagnosed with heart defect by physical exam
+	 	<br>
+	 	<input type="checkbox" name="other">Other(ex. limb anomaly). Specify:
+	 	<br>
+	 	<textarea name="paragraph_text" cols="50" rows="10"></textarea>
+	 </form>
+	  <button type="button" class="btn btn-primary btn-block"ui-sref="/testRepeat">Next</button>
+	  <div class="modal fade" id="parentConsentModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Parent Consent Form</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

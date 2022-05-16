@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <meta name="theme-color" content="#EF5350" />
+  <title>Dash</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <script type="text/javascript" src="node_modules/lockr/lockr.min.js"></script>
+  <script type="text/javascript" src="js/storage.js"></script>
+
+</head>
+
+<body>
+  <div class="navbar-fixed">
+  <nav class="red lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Dash</a>
+      <ul id="navId" class="right hide-on-med-and-down">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="future.html">Scheduled Runs</a></li>
+        <li><a href="past.html">Run Log</a></li>
+        <li><a href="diary.html">Food Diary</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <div id="sidebar-header">
+          <div class="row">
+            <div class="col sm5">
+              <img class="profile-thumbnail circle" src="img/shoe-final.jpg" height=40 width=40>
+            </div>
+            <div class="acct-info col sm7">
+              <h6>Eva Person
+                <p>
+                  <small>eva.person@domain.com</small> 
+                </p>
+              </h6>
+            </div>
+          </div>
+        </div>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="future.html">Scheduled Runs</a></li>
+        <li><a href="past.html">Run Log</a></li>
+        <li><a href="diary.html">Food Diary</a></li>
+        <li><a href="plan.html">Plan a Run</a></li>
+        <li><a href="goals.html">Goals & Progress</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
+        <div class="col s6">
+          <div class="card-panel center-align white-text cyan">
+               <h6>Distance Convered (km)</h6>
+               <div class="" id="dist-covered">9</div>
+          </div>
+        </div>
+         <div class="col s6">
+          <div class="card-panel center-align cyan white-text">
+              <h6>Distance Remaining (km)</h6>
+               <div id="dist-remaining">12</div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+       <div class="col s12">
+          <div class="card-panel center-align cyan white-text">
+              <h6>Average Speed (km/h)</h6>
+               <div id="speed">12</div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+       <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="img/FakeMap.png">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Route Preview<i class="material-icons right">more_vert</i></span>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Route Preview<i class="material-icons right">close</i></span>
+              <p>This depicts the running route.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <a href="#" style="width: 100%;" id="end-btn" class="waves-effect waves-light cyan btn">End Run</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script id="__bs_script__">
+    //<![CDATA[
+    document.write("<script async src='https://HOST:8081/browser-sync/browser-sync-client.2.11.2.js'><\/script>".replace("HOST", location.hostname));
+    //]]>
+  </script>
+  
+  <script type="text/javascript">
+    function parse_get(getstr)
+    {
+      var v = window.location.search.substring(1);
+      var cap_id = /id=(\d+)/;
+      var cap_fut = /future=(\d+)/;
+      return {"id": parseInt(getstr.match(cap_id)[1]),
+              "future": parseInt(getstr.match(cap_fut)[1])};
+    }
+    
+    $(function()
+    {
+      var loc = parse_get(window.location.search);
+      var runlist = loc.future == 0 ? Lockr.get("runs") : Lockr.get("futureruns");
+      var runobj = runlist[loc.id];
+      var past = loc.future;
+      var dist = runobj.distance == undefined || runobj.distance == "" ? Math.floor(Math.random() * 20) : parseInt(runobj.distance);
+      var dist_covered = 2;
+      var remaining = 0;
+      var s = 2;
+      
+      if(past == 0) {
+        dist_covered = dist;
+        $('#end-btn').hide();
+      } else {
+        remaining = dist - 2;
+      }
+     
+      $('#dist-covered').text(dist_covered);
+      $('#dist-remaining').text(remaining);
+      $('#speed').text(s);
+      
+      console.log(runobj)
+    })
+  </script>
+</body>
+
+</html>

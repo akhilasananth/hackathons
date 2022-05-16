@@ -1,0 +1,9 @@
+C:\Code\201704HackingHealth\ApiPrime\CCHD\CCHD\bin\Debug\netcoreapp1.1\CCHD.deps.json
+C:\Code\201704HackingHealth\ApiPrime\CCHD\CCHD\bin\Debug\netcoreapp1.1\CCHD.runtimeconfig.json
+C:\Code\201704HackingHealth\ApiPrime\CCHD\CCHD\bin\Debug\netcoreapp1.1\CCHD.runtimeconfig.dev.json
+C:\Code\201704HackingHealth\ApiPrime\CCHD\CCHD\bin\Debug\netcoreapp1.1\CCHD.dll
+C:\Code\201704HackingHealth\ApiPrime\CCHD\CCHD\obj\Debug\netcoreapp1.1\CCHD.csprojResolveAssemblyReference.cache
+C:\Code\201704HackingHealth\ApiPrime\CCHD\CCHD\obj\Debug\netcoreapp1.1\CCHD.AssemblyInfo.cs
+C:\Code\201704HackingHealth\ApiPrime\CCHD\CCHD\bin\Debug\netcoreapp1.1\CCHD.pdb
+C:\Code\201704HackingHealth\ApiPrime\CCHD\CCHD\obj\Debug\netcoreapp1.1\CCHD.dll
+C:\Code\201704HackingHealth\ApiPrime\CCHD\CCHD\obj\Debug\netcoreapp1.1\CCHD.pdb
